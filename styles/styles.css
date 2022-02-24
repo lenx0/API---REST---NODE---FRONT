@@ -1,0 +1,9 @@
+*{
+    display: flexbox;
+}
+.header {
+    justify-content: center;
+    text-align: center;
+    background-color: black;
+    
+}

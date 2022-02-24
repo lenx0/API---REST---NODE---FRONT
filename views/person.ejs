@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    </head>
+    <body>
+        <div class="header">
+            BEM-VINDO<br>
+            =-=-=-=-=-=-=-=-=-=-=-=<br>
+            Pesquise uma pessoa usando o id<br>
+            =-=-=-=-=-=-=-=-=-=-=-=
+        </div>
+        <br>
+        <div>
+            Id
+        </div>
+        <input type="text" placeholder="Informe o ID" id="inputNomePessoa">
+        <button class="btnPesquisar">
+            Pesquisar
+        </button>
+        <div>
+            <br>
+            Resultado da pesquisa:
+        </div>
+        <form action="/pagina-processa-dados-do-form" method="post">
+            <div>
+                <label for="name">Nome:</label>
+                <input type="text" id="inputName" />
+            </div>
+            <br>
+            <div>
+                <label for="lastname">Sobrenome:</label>
+                <input type="text" id="inputLastName" />
+            </div>
+            <br>
+            <div>
+                <label for="age">Idade:</label>
+                <input type="text" id="inputAge" />
+            </div>
+            <br>
+            <div>
+                <label for="job">Profissão:</label>
+                <input type="text" id="inputJob" />
+            </div>
+            <br>
+            <div class="btnLimpar">
+                <button type="submit">Limpar campos</button>
+            </div>
+        </form>
+    </body>
+</html>
