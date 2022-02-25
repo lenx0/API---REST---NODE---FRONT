@@ -12,9 +12,9 @@
         </div>
         <br>
         <div>
-            Id
+            ID
         </div>
-        <input type="text" placeholder="Informe o ID" id="inputNomePessoa">
+        <input type="text" placeholder="Informe o ID" id="inputId">
         <button class="btnPesquisar">
             Pesquisar
         </button>
@@ -22,7 +22,7 @@
             <br>
             Resultado da pesquisa:
         </div>
-        <form action="/pagina-processa-dados-do-form" method="post">
+        <form >
             <div>
                 <label for="name">Nome:</label>
                 <input type="text" id="inputName" />
@@ -44,8 +44,32 @@
             </div>
             <br>
             <div class="btnLimpar">
-                <button type="submit">Limpar campos</button>
+                <button type="submit" class="btnLimpar" value="Limpar" onclick="limparPerson()">Limpar campos</button>
             </div>
         </form>
     </body>
 </html>
+<script>
+    
+    function limparPerson(){
+        document.getElementById('inputName').value = '';
+        document.getElementById('inputLastName').value = '';
+        document.getElementById('inputAge').value = '';
+        document.getElementById('inputJob').value = '';
+    }
+
+    function buscarPerson(persons, type){
+        let result = "";
+
+        for (let i = 0; i < persons; i++ ){
+            const person = persons[i];
+            if (person.type === type) {
+                if (result !== type) {
+                    result += person.name;
+                }
+            }
+        }
+        return result;
+    }
+
+</script>

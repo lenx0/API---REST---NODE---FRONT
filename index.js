@@ -11,8 +11,6 @@ app.set("view engine", "ejs");
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
-const controllerPerson = require('./controllers/person.controller.ejs');
-
 app.get("/", (req, res) => res.render("person"));
 
 const port_http = process.env.PORT_HTTP | 5004;
