@@ -1,75 +1,117 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-    </head>
-    <body>
-        <div class="header">
-            BEM-VINDO<br>
-            =-=-=-=-=-=-=-=-=-=-=-=<br>
-            Pesquise uma pessoa usando o id<br>
-            =-=-=-=-=-=-=-=-=-=-=-=
+
+<head>
+</head>
+
+<body>
+    <div class="header">
+        <pre><h1>BEM-VINDO</h1></pre>
+        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=<br>
+        <pre><h4>Pesquise uma pessoa usando o _ID</h4></pre>
+        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    </div>
+    <br>
+    <pre>_ID</pre>
+    <input type="text" size="0.5" Informe o _ID id="inputId">
+    <button type="submit" class="btnBuscar" value="Buscar" onclick="buscarPerson()">Pesquisar</button>
+    <br><br>
+    <div>
+        <br>
+        <pre><h4>Resultado da pesquisa:</h4></pre>
+    </div>
+    <form>
+        <div>
+            <label for="name">
+                <pre>Nome:</pre>
+            </label>
+            <input type="text" size="20" id="inputName" />
         </div>
         <br>
         <div>
-            ID
+            <label for="lastname">
+                <pre>Sobrenome:</pre>
+            </label>
+            <input type="text" size="20" id="inputLastName" />
         </div>
-        <input type="text" placeholder="Informe o ID" id="inputId">
-        <button class="btnPesquisar">
-            Pesquisar
-        </button>
+        <br>
         <div>
-            <br>
-            Resultado da pesquisa:
+            <label for="age">
+                <pre>Idade:</pre>
+            </label>
+            <input type="text" size="20" id="inputAge" />
         </div>
-        <form >
-            <div>
-                <label for="name">Nome:</label>
-                <input type="text" id="inputName" />
-            </div>
-            <br>
-            <div>
-                <label for="lastname">Sobrenome:</label>
-                <input type="text" id="inputLastName" />
-            </div>
-            <br>
-            <div>
-                <label for="age">Idade:</label>
-                <input type="text" id="inputAge" />
-            </div>
-            <br>
-            <div>
-                <label for="job">Profissão:</label>
-                <input type="text" id="inputJob" />
-            </div>
-            <br>
-            <div class="btnLimpar">
-                <button type="submit" class="btnLimpar" value="Limpar" onclick="limparPerson()">Limpar campos</button>
-            </div>
-        </form>
-    </body>
+        <br>
+        <div>
+            <label for="job">
+                <pre>Profissão:</pre>
+            </label>
+            <input type="text" id="inputJob" />
+        </div>
+        <br>
+        <div class="btnLimpar">
+            <button type="submit" class="btnLimpar" value="Limpar" onclick="limparPerson()">Limpar campos</button>
+        </div>
+    </form>
+</body>
+
 </html>
 <script>
-    
-    function limparPerson(){
+
+    let idPerson = undefined;
+
+    function setarPerson(person) {
+
+        idPerson = person ? person._id : undefined;
+
+        document.getElementById('inputName').value = person ? getName(person.names, '1') : '';
+        document.getElementById('inputLastName').value = person ? getLastNames(person.lastNames, '2') : '';
+        document.getElementById('inputAge').value = person ? getAges(person.ages, '3') : '';
+        document.getElementById('inputJob').value = person ? getJobs(menu.jobs) : '';
+    }
+
+    function limparPerson() {
         document.getElementById('inputName').value = '';
         document.getElementById('inputLastName').value = '';
         document.getElementById('inputAge').value = '';
         document.getElementById('inputJob').value = '';
     }
 
-    function buscarPerson(persons, type){
+    function buscarPerson() {
+
+        const inputId = document.getElementById('inputId').value;
+
+        const urlNode = `/:id/${(inputId ? inputId : "")}`;
+
+        requestGet(API_LOCAL, urlNode, null, (json) => {
+            var objPerson = JSON.parse(json);
+            console.log(objPerson);
+            setarPerson(objPerson.person);
+        });
+    }
+
+    function getName(names, type) {
         let result = "";
 
-        for (let i = 0; i < persons; i++ ){
-            const person = persons[i];
-            if (person.type === type) {
-                if (result !== type) {
-                    result += person.name;
-                }
+        for (let i = 0; i < names.length; i++) {
+            const name = names[i];
+            if (name.type === type) {
+                if (result !== "") result += ", ";
+                result += name.names;
             }
         }
+
         return result;
+    }
+
+    function pegarNome() {
+
+        let person = {
+            name: getNamePerson(),
+        };
+        console.log(person);
+        return person;
     }
 
 </script>

@@ -3,6 +3,7 @@ const app = express();
 const bp = require("body-parser");
 const http = require('http');
 const fs = require('fs');
+const res = require("express/lib/response");
 const httpOption = {};
 
 require('dotenv').config();
@@ -12,6 +13,10 @@ app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
 app.get("/", (req, res) => res.render("person"));
+app.get("/person", function(req, res){
+    res.render("person")
+})
+app.get("/search", async (req, res) => person.contoller.search(req, res));
 
 const port_http = process.env.PORT_HTTP | 5004;
 
